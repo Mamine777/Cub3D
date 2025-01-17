@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   y3d.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/16 16:48:23 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:49:55 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef Y3D_H
 # define Y3D_H
 
-# include "/usr/local/include/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include "inc/gnl/get_next_line.h"
 # include "inc/libft/libft.h"
 # include <fcntl.h>
@@ -24,15 +24,15 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define TILE_SIZE 48
+# define TILE_SIZE 64
 
 # define ESC_KEY 53
-# define A 0
-# define D 2
-# define W 13
-# define S 1
-# define LEFT 123
-# define RIGHT 124
+# define A 97
+# define D 100
+# define W 119
+# define S 115
+# define LEFT 65361
+# define RIGHT 65363
 
 # define PI 3.14159265359
 typedef struct s_textures

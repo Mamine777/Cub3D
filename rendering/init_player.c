@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:40:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/17 12:06:08 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:13:52 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ bool	set_x_y(t_y3d *data, int *x, int *y)
 {
 	int		i;
 	int		j;
-	bool	is_found;
 
 	i = -1;
-	is_found = false;
 	while (++i, i < data->height)
 	{
 		j = -1;
@@ -63,7 +61,6 @@ bool	set_x_y(t_y3d *data, int *x, int *y)
 			if (data->map[i][j] == 'W' || data->map[i][j] == 'N'
 				|| data->map[i][j] == 'E' || data->map[i][j] == 'S')
 			{
-				is_found = true;
 				*x = j * TILE_SIZE;
 				*y = i * TILE_SIZE;
 				return (true);
@@ -74,13 +71,25 @@ bool	set_x_y(t_y3d *data, int *x, int *y)
 }
 void	init_player(t_player *player, t_y3d *data)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	locate;
 
 	if (set_x_y(data, &x, &y))
 	{
 		player->x = x;
 		player->y = y;
+		locate = data->map[y / TILE_SIZE][x / TILE_SIZE];
+		printf("loca%c\n", data->map[y / TILE_SIZE][x / TILE_SIZE]);
+		if (locate == 'N')
+			player->angle = PI / 2;
+		else if (locate == 'S')
+			player->angle = 3 * PI / 2;
+		else if (locate == 'E')
+            player->angle = 0;
+		else if (locate == 'W')
+			player->angle = PI;
+		printf("Player starting direction: %f radians\n", player->angle);
 	}
 	player->angle = PI / 2;
 	player->key_up = false;
