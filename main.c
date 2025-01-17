@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:48:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/15 16:30:16 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:56:23 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int ac, char **av)
 
 	if (init_texture(texture, av) != 0)
 		return (clean_texture(texture), 1);
-	//	system("leaks cub3d");
 	if (init_map(data, av[1]))
 		return (clean_texture(texture), 1);
 	if (validate_input(data))
@@ -46,10 +45,7 @@ int	main(int ac, char **av)
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	//mlx_loop_hook(game.mlx, minimap, &game);
 	mlx_loop(game.mlx);
-
-	//
-	// for (int i = 0; i < data.height; i++)
-	// 	printf("%s\n", data.map[i]);
+//
 	couble_free(data->map);
 	clean_texture(texture);
 }

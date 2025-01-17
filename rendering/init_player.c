@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:40:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/15 16:35:53 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:06:08 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,14 @@ bool	touch(float px, float py, t_y3d *data)
 	int	x;
 	int	y;
 
-	x = px / TILE_SIZE;
-	y = py / TILE_SIZE;
+	x = (px + 0.1) / TILE_SIZE;
+	y = (py + 0.1) / TILE_SIZE;
+	if (x < 0 || y < 0 || y >= data->height || x >= data->row_width[y])
+		return (true);
 	if (data->map[y][x] == '1')
 		return (true);
 	return (false);
 }
-
 
 void	move_if_valid(float new_x, float new_y, t_player *player, t_y3d *data)
 {
@@ -150,27 +151,28 @@ void	move_player(t_player *player, t_y3d *data)
 	float	cos_angle;
 	float	sin_angle;
 
-	speed = 3;
-	angle_speed = 0.03;
+	speed = 5;
+	angle_speed = 0.05;
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
-
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)
 		player->angle += angle_speed;
-
 	if (player->angle > 2 * PI)
 		player->angle -= 2 * PI;
 	if (player->angle < 0)
 		player->angle += 2 * PI;
-
 	if (player->key_up)
-		move_if_valid(player->x + cos_angle * speed, player->y + sin_angle * speed, player, data);
+		move_if_valid(player->x + cos_angle * speed, player->y + sin_angle
+			* speed, player, data);
 	if (player->key_down)
-		move_if_valid(player->x - cos_angle * speed, player->y - sin_angle * speed, player, data);
+		move_if_valid(player->x - cos_angle * speed, player->y - sin_angle
+			* speed, player, data);
 	if (player->key_left)
-		move_if_valid(player->x + sin_angle * speed, player->y - cos_angle * speed, player, data);
+		move_if_valid(player->x + sin_angle * speed, player->y - cos_angle
+			* speed, player, data);
 	if (player->key_right)
-		move_if_valid(player->x - sin_angle * speed, player->y + cos_angle * speed, player, data);
+		move_if_valid(player->x - sin_angle * speed, player->y + cos_angle
+			* speed, player, data);
 }

@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/15 16:33:37 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:10:37 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	float	height;
 	int		start_y;
 	int		end;
-
+	int		y;
 	cos_angle = cos(start_x);
 	sin_angle = sin(start_x);
 	ray_x = player->x;
@@ -52,10 +52,21 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	height = (TILE_SIZE / dist) * ((data->biggest_width * TILE_SIZE) / 2);
 	start_y = ((data->height * TILE_SIZE) - height) / 2;
 	end = start_y + height;
+	y = -1;
+	while (++y, y < start_y)
+	{
+		put_pixel(i, y, game->y3d->texture->ceiling_color, game);
+	}
 	while (start_y < end)
 	{
-		put_pixel(i, start_y, 255, game);
+		put_pixel(i, start_y, 250, game);
 		start_y++;
+	}
+	y = end;
+	while (y < (data->height * TILE_SIZE))
+	{
+		put_pixel(i, y, game->y3d->texture->floor_color, game);
+		y++;
 	}
 }
 
