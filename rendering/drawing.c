@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/17 12:10:37 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:35:38 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	draw_loop(t_game *game)
 {
 	float fraction;
 	float start_x;
-	;
 	int i;
 	t_y3d *data;
 
