@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:20:58 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/09 12:11:25 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:33:51 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ int set_texture(int fd, t_textures *texture)
 	            return (error("Invalid texture format"), 1);
 	        }
 	        if (!ft_strncmp(path[0], "NO", 3))
+			{
 	            set_north(texture, path[1], &texture->no);
+			}
 	        else if (!ft_strncmp(path[0], "SO", 3))
 	            set_south(texture, path[1], &texture->so);
 	        else if (!ft_strncmp(path[0], "WE", 3))

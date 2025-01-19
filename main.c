@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:48:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/16 12:56:23 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:42:16 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int ac, char **av)
 	if (!data)
 		return (error("Failed to allocate memory for data\n"),
 			free(texture), 1);
-
 	if (init_texture(texture, av) != 0)
 		return (clean_texture(texture), 1);
 	if (init_map(data, av[1]))
@@ -38,14 +37,14 @@ int	main(int ac, char **av)
 	if (check_map_spaces(data))
 		return (clean_texture(texture), couble_free(data->map), 1);
 	//
-
 	init_game(&game, data, texture);
+	if (init_xpm(texture, &game))
+		return (clean_texture(texture), couble_free(data->map), 1);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
-	//mlx_loop_hook(game.mlx, minimap, &game);
 	mlx_loop(game.mlx);
-//
+	//
 	couble_free(data->map);
 	clean_texture(texture);
 }
