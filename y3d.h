@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/19 16:41:31 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:37:01 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct s_game
 	int				endian;
 	struct s_player	player;
 	struct s_y3d	*y3d;
+	struct t_xpm	*xpm;
 }					t_game;
 typedef struct s_y3d
 {
@@ -116,7 +117,7 @@ void				cleanup_and_exit(t_textures *texture, char **path,
 						char *line, const char *msg);
 bool				check_map_spaces(t_y3d *data);
 bool				is_valid_space(t_y3d *data, int x, int y);
-bool				init_xpm(t_textures *texture, t_game *game);
+bool	init_xpm(t_textures *texture, t_game *game, t_xpm *xpm);
 // clean
 void				clean_texture(t_textures *texture);
 void				clear_screen(t_game *game);
@@ -127,7 +128,7 @@ int					count_map_dimensions(int fd, t_y3d *data, char *first_line);
 int					skip_config_lines(int fd, char **line);
 int					check_map_line(char *line);
 int					init_map(t_y3d *data, char *file);
-void				init_game(t_game *game, t_y3d *data, t_textures *textrure);
+void	init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm);
 void				init_player(t_player *player, t_y3d *data);
 // rendering
 void				draw_square(int x, int y, int size, int color,

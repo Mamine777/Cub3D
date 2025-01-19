@@ -1,4 +1,4 @@
-NO img/greystone.xpm
+NO img/dollar.xpm
 SO dkoko
 WE dkoko
 EA dkoko

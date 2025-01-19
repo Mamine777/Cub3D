@@ -6,12 +6,33 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/18 18:45:05 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:51:50 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../y3d.h"
 
+void	draw_wall_column(t_game *game, int x, int start_y, int end_y, t_xpm *xpm, float wall_height)
+{
+    int texture_y;
+    int texture_x;
+    int y;
+    int color;
+    float step;
+    float texture_pos;
+
+    step = (float)xpm->height / wall_height;
+    texture_pos = 0;
+
+    for (y = start_y; y < end_y; y++)
+    {
+        texture_y = (int)texture_pos % xpm->height;
+        texture_x = x % xpm->width;
+        color = xpm->colors[texture_y * xpm->width + texture_x];
+        put_pixel(x, y, color, game);
+        texture_pos += step;
+    }
+}
 
 float distance(float x, float y)
 {
@@ -38,6 +59,9 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	int		start_y;
 	int		end;
 	int		y;
+	t_xpm	*xpm;
+
+	xpm = game->xpm;
 	cos_angle = cos(start_x);
 	sin_angle = sin(start_x);
 	ray_x = player->x;
@@ -57,11 +81,8 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	{
 		put_pixel(i, y, game->y3d->texture->ceiling_color, game);
 	}
-	while (start_y < end)
-	{
-		put_pixel(i, start_y, 0xFFFFFF, game);
-		start_y++;
-	}
+	draw_wall_column(game, i, start_y, end, xpm, height);
+
 	y = end;
 	while (y < (data->height * TILE_SIZE))
 	{
@@ -72,10 +93,10 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 
 int	draw_loop(t_game *game)
 {
-	float fraction;
-	float start_x;
-	int i;
-	t_y3d *data;
+	float	 fraction;
+	float	 start_x;
+	int 	i;
+	t_y3d 	*data;
 
 	data = game->y3d;
 	(void) data;

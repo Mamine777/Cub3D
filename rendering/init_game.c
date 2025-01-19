@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:30:59 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/17 14:35:33 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:36:33 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	draw_square(int x, int y, int size, int color, t_game *game)
 	for (int i = 0; i < size; i++)
 		put_pixel(x + i, y + size, color, game);
 }
-void	init_game(t_game *game, t_y3d *data, t_textures *textrure)
+
+void	init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, data->biggest_width * TILE_SIZE,
@@ -48,6 +49,7 @@ void	init_game(t_game *game, t_y3d *data, t_textures *textrure)
 	data->game = game;
 	data->texture = textrure;
 	game->y3d = data;
+	game->xpm = xpm;
 	init_player(&game->player, data);
 }
 
