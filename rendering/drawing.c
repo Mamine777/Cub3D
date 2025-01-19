@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/17 12:35:38 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/18 18:45:05 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	}
 	while (start_y < end)
 	{
-		put_pixel(i, start_y, 250, game);
+		put_pixel(i, start_y, 0xFFFFFF, game);
 		start_y++;
 	}
 	y = end;
@@ -78,6 +78,7 @@ int	draw_loop(t_game *game)
 	t_y3d *data;
 
 	data = game->y3d;
+	(void) data;
 	clear_screen(game);
 	move_player(&game->player, game->y3d);
 	fraction = PI / 3 / (game->y3d->biggest_width * TILE_SIZE);

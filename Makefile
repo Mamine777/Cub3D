@@ -6,13 +6,13 @@
 #    By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:14:48 by mokariou          #+#    #+#              #
-#    Updated: 2025/01/17 12:46:58 by mokariou         ###   ########.fr        #
+#    Updated: 2025/01/19 16:02:04 by mokariou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 NORM = norminette
 
 MLX = /home/mokariou/Desktop/circle-19/Cub3D/minilibx-linux/libmlx.a -Iminilibx-linux -lXext -lX11 -lm -lbsd
@@ -27,7 +27,7 @@ SRC_RENDERING = $(RENDERING_DR)init_game.c $(RENDERING_DR)init_player.c \
 SRC_PARSING = $(PARSING_DIR)set_texture.c \
               $(PARSING_DIR)error_utils.c \
 			  $(PARSING_DIR)cleanUp.c $(PARSING_DIR)init_text.c \
-			  $(PARSING_DIR)init_map.c $(PARSING_DIR)validate_map.c
+			  $(PARSING_DIR)init_map.c $(PARSING_DIR)validate_map.c $(PARSING_DIR)xpm.c
 SRC_GNL = $(GNL_DIR)get_next_line.c \
           $(GNL_DIR)get_next_line_utils.c
 SRC_LIBFT = $(LIBFT_DIR)ft_atoi.c $(LIBFT_DIR)ft_bzero.c $(LIBFT_DIR)ft_calloc.c \

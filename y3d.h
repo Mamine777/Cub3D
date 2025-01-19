@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/17 12:49:55 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:41:31 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define TILE_SIZE 64
+# define TILE_SIZE 52
 
 # define ESC_KEY 53
 # define A 97
@@ -50,6 +50,20 @@ typedef struct s_textures
 	int				ceiling_color;
 }					t_textures;
 
+
+typedef struct t_xpm
+{
+	int		width;
+	int		height;
+	int		*colors;
+	void	*img_ptr;
+	int		*data;
+	int		bbp;
+	int		size_line;
+	int		endian;
+	
+}	t_xpm;
+
 typedef struct s_player
 {
 	float			x;
@@ -69,6 +83,7 @@ typedef struct s_game
 	void			*win;
 	void			*img;
 	void			*img_mini;
+	void			*no_img;
 	char			*data;
 	int				bbp;
 	int				size_line;
@@ -101,6 +116,7 @@ void				cleanup_and_exit(t_textures *texture, char **path,
 						char *line, const char *msg);
 bool				check_map_spaces(t_y3d *data);
 bool				is_valid_space(t_y3d *data, int x, int y);
+bool				init_xpm(t_textures *texture, t_game *game);
 // clean
 void				clean_texture(t_textures *texture);
 void				clear_screen(t_game *game);
