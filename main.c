@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:48:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/19 16:42:16 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:36:43 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int ac, char **av)
 	t_textures *texture;
 	t_y3d *data;
 	t_game game;
-
+	t_xpm	*xpm;
 	if (ac != 2)
 		return (1);
 	texture = malloc(sizeof(t_textures));
@@ -28,6 +28,10 @@ int	main(int ac, char **av)
 	if (!data)
 		return (error("Failed to allocate memory for data\n"),
 			free(texture), 1);
+	xpm = malloc(sizeof(t_xpm));
+	if (!xpm)
+		return (error("Failed to allocate memory for data\n"),
+			free(texture), free(data),1);
 	if (init_texture(texture, av) != 0)
 		return (clean_texture(texture), 1);
 	if (init_map(data, av[1]))
@@ -37,8 +41,8 @@ int	main(int ac, char **av)
 	if (check_map_spaces(data))
 		return (clean_texture(texture), couble_free(data->map), 1);
 	//
-	init_game(&game, data, texture);
-	if (init_xpm(texture, &game))
+	init_game(&game, data, texture, xpm);
+	if (init_xpm(texture, &game, xpm))
 		return (clean_texture(texture), couble_free(data->map), 1);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
