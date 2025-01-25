@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:48:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/19 17:36:43 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:34:06 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av)
 	if (!data)
 		return (error("Failed to allocate memory for data\n"),
 			free(texture), 1);
-	xpm = malloc(sizeof(t_xpm));
+	xpm = malloc(sizeof(t_xpm) * 4);
 	if (!xpm)
 		return (error("Failed to allocate memory for data\n"),
 			free(texture), free(data),1);

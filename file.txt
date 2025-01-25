@@ -1,7 +1,7 @@
 NO img/redbrick.xpm
-SO dkoko
-WE dkoko
-EA dkoko
+SO img/greystone.xpm
+WE img/bluestone.xpm
+EA img/eagle.xpm
 
 F 105,105,105
 C 173,216,230
