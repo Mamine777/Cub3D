@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/22 17:08:27 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/25 16:51:20 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define TILE_SIZE 52
+# define TILE_SIZE 64
 
 # define ESC_KEY 53
 # define A 97

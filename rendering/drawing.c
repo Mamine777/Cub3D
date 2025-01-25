@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/22 19:20:33 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/25 17:44:24 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	{
 		put_pixel(i, y, game->y3d->texture->ceiling_color, game);
 	}
-	draw_wall_column(game, i, start_y, end, xpm, height);
+	draw_wall_column(game, i, start_y, end, &xpm[1], height);
 	y = end;
 	while (y < (data->height * TILE_SIZE))
 	{
