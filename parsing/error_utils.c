@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:26:03 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/15 13:32:02 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:31:01 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ bool	validate_input(t_y3d *data)
 		if (!*data->map[i])
 			return (error("Error"), true);
 		j = -1;
-		while (++j, j < data->row_width[i] && data->map[i][j])
+		while (++j, j < data->row_width[i])
 		{
+			if (!data->map[i][j])
+				return(error("not valid line"), true);
 			if (data->map[i][j] == 'N' || data->map[i][j] == 'W' ||data->map[i][j] == 'S' || data->map[i][j] == 'E')
 				count++;
 		}

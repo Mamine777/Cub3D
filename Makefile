@@ -6,16 +6,16 @@
 #    By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:14:48 by mokariou          #+#    #+#              #
-#    Updated: 2025/01/22 16:27:31 by mokariou         ###   ########.fr        #
+#    Updated: 2025/01/27 17:07:43 by mokariou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
 NORM = norminette
 
-MLX = /home/mokariou/Desktop/circle-19/Cub3D/minilibx-linux/libmlx.a -Iminilibx-linux -lXext -lX11 -lm -lbsd
+MLX = minilibx-linux/libmlx.a -Iminilibx-linux -lXext -lX11 -lm -lbsd
 OBJ_DIR = obj/
 LIBFT_DIR = inc/libft/
 GNL_DIR = inc/gnl/
