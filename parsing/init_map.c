@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:27:54 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/14 19:13:42 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:22:05 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	check_map_line(char *line)
 	return (0);
 }
 
+//trim the str
 int	skip_config_lines(int fd, char **line)
 {
 	char	*buffer;

@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:15:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/25 17:44:24 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:16:31 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ void draw_wall_column(t_game *game, int x, int start_y, int end_y, t_xpm *xpm, f
     step = (float)xpm->height / wall_height;
     texture_pos = 0;
 
-    for (y = 0; y < start_y; y++)
-        put_pixel(x, y, game->y3d->texture->ceiling_color, game);
-
     for (y = start_y; y < end_y; y++)
     {
         texture_y = (int)texture_pos % xpm->height;
@@ -44,9 +41,7 @@ void draw_wall_column(t_game *game, int x, int start_y, int end_y, t_xpm *xpm, f
         put_pixel(x, y, color, game);
         texture_pos += step;
     }
-	
-    for (y = end_y; y < game->y3d->height * TILE_SIZE; y++)
-        put_pixel(x, y, game->y3d->texture->floor_color, game);
+
 }
 
 
@@ -98,7 +93,7 @@ void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	{
 		put_pixel(i, y, game->y3d->texture->ceiling_color, game);
 	}
-	draw_wall_column(game, i, start_y, end, &xpm[1], height);
+	draw_wall_column(game, i, start_y, end, &xpm[0], height);
 	y = end;
 	while (y < (data->height * TILE_SIZE))
 	{
