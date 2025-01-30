@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 17:07:39 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:24:08 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ typedef struct s_player
 	bool			key_right;
 	bool			left_rotate;
 	bool			right_rotate;
-	struct s_y3d	*y3d;
+	struct s_game	*game;
 	struct t_xpm	*xpm;
 
 }					t_player;
@@ -172,6 +172,7 @@ bool	init_xpm(t_textures *texture, t_game *game, t_xpm *xpm);
 // clean
 void				clean_texture(t_textures *texture);
 void				clear_screen(t_game *game);
+int					esc(t_game *game);
 // init
 int					init_map(t_y3d *data, char *file);
 int					fill_map_data(int fd, t_y3d *data, char *first_line);

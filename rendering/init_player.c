@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:40:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 17:15:31 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:09:05 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	key_press(int keycode, t_player *player)
 {
 	printf("%d\n", keycode);
 	if (keycode == ESC_KEY)
-		exit(0);
+		cleanup_and_exit(player->game->y3d, player->game->xpm);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)
@@ -118,6 +118,8 @@ void	init_player(t_player *player, t_y3d *data)
 	player->key_right = false;
 	player->left_rotate = false;
 	player->right_rotate = false;
+	player->game = data->game;
+	player->xpm = data->game->xpm;
 }
 
 bool can_move_to_position(t_y3d *data, float y, float x)

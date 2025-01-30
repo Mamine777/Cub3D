@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:20:58 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/27 11:17:43 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:17:32 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	set_north(t_textures *texture, char *line, bool *flag)
 	if (*flag == true)
 	{
 		error("testure duplication");
-		//exit(1);
+		exit(1);
 	}
 	if (texture->north)
 		free(texture->north);

@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:30:59 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 16:40:31 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:03:06 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	put_pixel(int x, int y, int color, t_game *game)
 	game->data[index + 1] = (color >> 8) & 0xFF;
 	game->data[index + 2] = (color >> 16) & 0xFF;
 }
+
 
 void	init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm)
 {

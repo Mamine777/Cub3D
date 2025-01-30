@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:35:22 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 15:44:23 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:48:05 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ bool	set_xpm(t_game *game, char *old_path, t_xpm *xpm, int i)
 	if (!xpm[i].img_ptr)
 		return (error("failed xpm"),true);
 	xpm[i].data = (int *)mlx_get_data_addr(xpm[i].img_ptr, &xpm[i].bbp, &xpm[i].size_line, &xpm[i].endian);
+	if (!xpm[i].data)
+		return (true);
 	xpm[i].colors = (int *)malloc(xpm[i].width * xpm[i].height * sizeof(int));
 	if (!xpm[i].colors)
 		return (mlx_destroy_image(game->mlx ,xpm[i].img_ptr), true);
