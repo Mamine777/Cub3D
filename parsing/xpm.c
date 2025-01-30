@@ -6,13 +6,11 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 16:35:22 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/27 17:02:03 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:44:23 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../y3d.h"
-
-
 
 bool	set_xpm(t_game *game, char *old_path, t_xpm *xpm, int i)
 {
