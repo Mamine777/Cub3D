@@ -6,7 +6,7 @@
 #    By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:14:48 by mokariou          #+#    #+#              #
-#    Updated: 2025/01/29 14:12:40 by mokariou         ###   ########.fr        #
+#    Updated: 2025/01/30 16:46:31 by mokariou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ PARSING_DIR = parsing/
 RENDERING_DR = rendering/
 SRC_MAIN = main.c
 SRC_RENDERING = $(RENDERING_DR)init_game.c $(RENDERING_DR)init_player.c \
-				$(RENDERING_DR)drawing.c $(RENDERING_DR)minimap.c
+				$(RENDERING_DR)drawing.c $(RENDERING_DR)minimap.c \
+				$(RENDERING_DR)pixel_utils.c
 SRC_PARSING = $(PARSING_DIR)set_texture.c \
               $(PARSING_DIR)error_utils.c \
 			  $(PARSING_DIR)cleanUp.c $(PARSING_DIR)init_text.c \

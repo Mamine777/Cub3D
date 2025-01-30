@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 13:25:41 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:07:39 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #define EPSILON 0.0001
 #define MIN_WALL_DIST 0.1
 
-# define ESC_KEY 53
+# define ESC_KEY 65307
 # define A 97
 # define D 100
 # define W 119
@@ -82,6 +82,8 @@ typedef struct s_player
 	bool			key_right;
 	bool			left_rotate;
 	bool			right_rotate;
+	struct s_y3d	*y3d;
+	struct t_xpm	*xpm;
 
 }					t_player;
 typedef struct s_game
@@ -106,6 +108,13 @@ typedef struct t_extra
 	struct t_xpm	*xpm;
 }	t_extra;
 
+typedef struct s_draw_info
+{
+	t_xpm	*current_texture;
+	int		texX;
+	double	step;
+	double	texPos;
+}	t_draw_info;
 typedef struct s_ray
 {
 	double	cameraX;
@@ -147,14 +156,16 @@ void				error(const char *str);
 void				couble_free(char **path);
 void				init_bool(t_textures *texture);
 bool				validate_input(t_y3d *data);
+void				calculate_texture_position(t_game *game, t_ray *ray, t_draw_info *info);
+int 				get_color(t_game *game, t_ray *ray, t_xpm *wall);
+t_xpm				*wall_side(t_game *game, t_ray *ray);
+void				cleanup_and_exit(t_y3d *y3d, t_xpm *xpm);
 
 // parsing
 int					set_texture(int fd, t_textures *texture);
 int					init_texture(t_textures *texture, char **av);
 int					parse_rgb(int fd, t_textures *texture);
 int					set_rgb(char *line, int *color);
-void				cleanup_and_exit(t_textures *texture, char **path,
-						char *line, const char *msg);
 bool				check_map_spaces(t_y3d *data);
 bool				is_valid_space(t_y3d *data, int x, int y);
 bool	init_xpm(t_textures *texture, t_game *game, t_xpm *xpm);

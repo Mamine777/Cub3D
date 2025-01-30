@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/13 13:40:23 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 13:21:29 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:15:31 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 int	key_press(int keycode, t_player *player)
 {
 	printf("%d\n", keycode);
+	if (keycode == ESC_KEY)
+		exit(0);
 	if (keycode == W)
 		player->key_up = true;
 	if (keycode == S)
@@ -77,8 +79,8 @@ void	init_player(t_player *player, t_y3d *data)
 
 	if (set_x_y(data, &x, &y))
 	{
-		player->x = (double)x;
-		player->y = (double)y;
+		player->x = (double)x + 0.5;
+		player->y = (double)y + 0.5;
 
 		locate = data->map[y][x];
 		if (locate == 'E')
@@ -148,8 +150,8 @@ void move_player(t_player *player, t_y3d *data)
 	double oldDirX;
 	double oldPlaneX;
 
-	speed = 0.3;
-	angle_speed = 0.2;
+	speed = 0.111;
+	angle_speed = 0.1;
 	if (player->left_rotate)
 	{
 		oldDirX = player->dirX;
