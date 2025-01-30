@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:06:35 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 17:11:54 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 21:15:49 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ void	clean_texture(t_textures *texture)
 		free(texture->south);
 	if (texture->west)
 		free(texture->west);
-	if (texture)
-		free(texture);
-	texture->east = NULL;
-	texture->north = NULL;
-	texture->south = NULL;
-	texture->west = NULL;
+	free(texture);
 }
 
 void	clean_y3d(t_y3d *y3d)
@@ -40,29 +35,21 @@ void	clean_y3d(t_y3d *y3d)
 	free(y3d);
 }
 
-void	free_game(t_game *game)
+void free_game(t_game *game)
 {
-	if (!game)
-		return ;
-	if (game->mlx)
-	{
-		if (game->win)
-			mlx_destroy_window(game->mlx, game->win);
-		if (game->img)
-			mlx_destroy_image(game->mlx, game->img);
-		if (game->img_mini)
-			mlx_destroy_image(game->mlx, game->img_mini);
-		mlx_destroy_display(game->mlx);
-	}
-	free(game);
-	if (game->y3d)
-		free(game->y3d);
-	if (game->xpm)
-		free(game->xpm);
-	if (game->player.y3d)
-		free(game->player.y3d);
-	if (game->player.xpm)
-		free(game->player.xpm);
+    if (!game)
+        return ;
+
+    if (game->mlx)
+    {
+        if (game->win)
+            mlx_destroy_window(game->mlx, game->win);
+        if (game->img)
+            mlx_destroy_image(game->mlx, game->img);
+        mlx_destroy_display(game->mlx);
+    }
+
+	//free(game);
 }
 
 void	free_xpm(t_xpm *xpm)
@@ -71,22 +58,36 @@ void	free_xpm(t_xpm *xpm)
 
 	if (!xpm)
 		return ;
-	i = 0;
+	i = -1;
 	while (++i, i < 4)
 	{
-		if (xpm[i].colors != NULL)
-        	free(xpm[i].colors);
-    	if (xpm[i].data != NULL)
-			free(xpm[i].data);
+		printf("i : %d\n", i);
+		if (&xpm[i] && xpm[i].colors)
+            free(xpm[i].colors);
 	}
 	free(xpm);
 }
 
-void    cleanup_and_exit(t_y3d *y3d, t_xpm *xpm)
+void cleanup_and_exit(t_y3d *y3d, t_xpm *xpm)
 {
-	clean_texture(y3d->texture);
-	clean_y3d(y3d);
-	free_game(y3d->game);
-	free_xpm(xpm);
-	exit(0);
+    t_game *game = NULL;
+    (void) xpm;
+    if (y3d)
+    {
+        game = y3d->game;
+        clean_texture(y3d->texture);
+        clean_y3d(y3d);
+    }
+    if (game)
+        free_game(game);
+     if (xpm)
+        free_xpm(xpm);
+        
+    exit(0);
+}
+
+int	esc(t_game *game)
+{
+	cleanup_and_exit(game->y3d, game->xpm);
+	return (0);
 }
