@@ -6,11 +6,19 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:48:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/27 11:15:00 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:23:41 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "y3d.h"
+
+
+void	init_extra(t_game *game, t_xpm *xpm, t_extra *extra)
+{
+	extra->game = game;
+	extra->xpm = xpm;
+	game->xpm = xpm;
+}
 
 int	main(int ac, char **av)
 {
@@ -18,6 +26,8 @@ int	main(int ac, char **av)
 	t_y3d *data;
 	t_game game;
 	t_xpm	*xpm;
+	t_extra	extra;
+
 	if (ac != 2)
 		return (1);
 	texture = malloc(sizeof(t_textures));
@@ -44,9 +54,11 @@ int	main(int ac, char **av)
 	init_game(&game, data, texture, xpm);
 	if (init_xpm(texture, &game, xpm))
 		return (clean_texture(texture), couble_free(data->map), 1);
+	init_extra(&game, xpm, &extra);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game.player);
 	mlx_hook(game.win, 3, 1L << 1, key_release, &game.player);
-	mlx_loop_hook(game.mlx, draw_loop, &game);
+
+	mlx_loop_hook(game.mlx, draw_loop, &extra);
 	mlx_loop(game.mlx);
 	//
 	couble_free(data->map);

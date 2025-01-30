@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/27 11:43:38 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:25:41 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define TILE_SIZE 40
+# define WIDTH 1920
+# define HEIGHT 1080
+#define EPSILON 0.0001
+#define MIN_WALL_DIST 0.1
 
 # define ESC_KEY 53
 # define A 97
@@ -69,6 +72,10 @@ typedef struct s_player
 	float			x;
 	float			y;
 	float			angle;
+	float 			dirX;
+	float 			dirY;
+	float 			planeX;
+    float 			planeY;
 	bool			key_up;
 	bool			key_down;
 	bool			key_left;
@@ -92,6 +99,39 @@ typedef struct s_game
 	struct s_y3d	*y3d;
 	struct t_xpm	*xpm;
 }					t_game;
+
+typedef struct t_extra
+{
+	struct s_game 	*game;
+	struct t_xpm	*xpm;
+}	t_extra;
+
+typedef struct s_ray
+{
+	double	cameraX;
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	int		stepX;
+	int		stepY;
+	int		hit;
+	int		side;
+	double	perpWallDist;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	double	wallX;
+	int		tex_x;
+	double	step;
+	double	texPos;
+}				t_ray;
+
+
 typedef struct s_y3d
 {
 	char			**map;
@@ -128,7 +168,7 @@ int					count_map_dimensions(int fd, t_y3d *data, char *first_line);
 int					skip_config_lines(int fd, char **line);
 int					check_map_line(char *line);
 int					init_map(t_y3d *data, char *file);
-void	init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm);
+void				init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm);
 void				init_player(t_player *player, t_y3d *data);
 // rendering
 void				draw_square(int x, int y, int size, int color,
@@ -136,12 +176,19 @@ void				draw_square(int x, int y, int size, int color,
 int					key_release(int keycode, t_player *player);
 int					key_press(int keycode, t_player *player);
 void				move_player(t_player *player, t_y3d *data);
-int					draw_loop(t_game *game);
+void	draw_game(t_game *game, t_ray *draw, int x);
+void	wall_size(t_game *game, t_ray *draw);
+int					draw_loop(t_extra *extra);
 void				put_pixel(int x, int y, int color, t_game *game);
-bool				touch(float px, float py, t_y3d *data);
-float 				distance(float x, float y);
-void				draw_line(t_player *player, t_game *game, float start_x, int i);
-float 				fixed_dist(float x1, float y1, float x2, float y2, t_game *game);
+void 				move_player(t_player *player, t_y3d *data);
+void				wall_dist(t_game *game, t_ray *draw, int x);
+void 				wall_hit(t_game *game, t_ray *draw);
+void				init_ray(t_game *game, t_ray *draw, int x);
+void				calcul_ray(t_game *game, t_ray *draw, int x);
+void 				move_if_valid(float new_x, float new_y, t_player *player, t_y3d *data);
+bool 				can_move_to_position(t_y3d *data, float y, float x);
+bool				set_x_y(t_y3d *data, int *x, int *y);
+
 
 //BONUS
 
