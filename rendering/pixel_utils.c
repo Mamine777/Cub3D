@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:34:10 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 16:49:02 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:55:09 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,32 @@ t_xpm	*wall_side(t_game *game, t_ray *ray)
 	return (texture);
 }
 
-int get_color(t_game *game, t_ray *ray, t_xpm *wall)
+int	get_color(t_game *game, t_ray *ray, t_xpm *wall)
 {
-    int color;
+	int	color;
 
-    color = 0;
-	(void) game;
-    if (ray->tex_x >= 0 && ray->tex_x < wall->width &&
-        (int)ray->texPos >= 0 && (int)ray->texPos < wall->height)
-    {
-        color = wall->colors[(int)ray->texPos * wall->width + ray->tex_x];
-    }
-    
-    return (color);
+	color = 0;
+	(void)game;
+	if (ray->tex_x >= 0 && ray->tex_x < wall->width && (int)ray->texPos >= 0
+		&& (int)ray->texPos < wall->height)
+	{
+		color = wall->colors[(int)ray->texPos * wall->width + ray->tex_x];
+	}
+	return (color);
 }
 
-void	calculate_texture_position(t_game *game, t_ray *ray,
-			t_draw_info *info)
+void	calculate_texture_position(t_game *game, t_ray *ray, t_draw_info *info)
 {
-	double	wallX;
+	double wallX;
 
 	wallX = 0;
 	wallX -= floor(wallX);
-	(void) game;
+	(void)game;
 	info->texX = (int)(wallX * info->current_texture->width);
-	if ((ray->side == 0 && ray->rayDirX > 0)
-		|| (ray->side == 1 && ray->rayDirY < 0))
+	if ((ray->side == 0 && ray->rayDirX > 0) || (ray->side == 1
+			&& ray->rayDirY < 0))
 		info->texX = info->current_texture->width - info->texX - 1;
-	info->step = (double)info->current_texture->height
-		/ (ray->drawEnd - ray->drawStart);
+	info->step = (double)info->current_texture->height / (ray->drawEnd
+			- ray->drawStart);
 	info->texPos = 0;
 }

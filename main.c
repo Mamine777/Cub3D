@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 12:48:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 21:18:21 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:06:22 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,12 @@ void	init_extra(t_game *game, t_xpm *xpm, t_extra *extra)
 	game->xpm = xpm;
 }
 
-void cleanup(t_textures *texture, t_y3d *data, t_xpm *xpm)
+void cleanup(t_textures *texture, t_y3d *data)
 {
     if (texture)
         clean_texture(texture);
-    if (data && data->map)
-        couble_free(data->map);
     if (data)
         free(data);
-    if (xpm)
-        free(xpm);
 }
 
 bool init_and_validate(t_textures *texture, t_y3d *data, t_xpm *xpm, char **map_file)
@@ -69,30 +65,27 @@ int	main(int ac, char **av)
 	t_textures *texture;
 	t_y3d *data;
 	t_game game;
-	t_xpm	*xpm;
+	t_xpm	xpm[4];
 	t_extra	extra;
 
 	if (ac != 2)
 		return (1);
 	texture = malloc(sizeof(t_textures));
 	data = malloc(sizeof(t_y3d));
-	xpm = malloc(sizeof(t_xpm) * 4);
 	(void)extra;
-	if (!texture || !data || !xpm)
-    {
-        error("Failed to allocate memory");
-        cleanup(texture, data, xpm);
-        return (1);
-    }
+	if (!texture || !data)
+        return (error("Failed to allocate memory"),
+            cleanup(texture, data), 1);
+//
     if (!init_and_validate(texture, data, xpm, av))
     {
-        cleanup(texture, data, xpm);
+        cleanup(texture, data);
         return (1);
     }
     if (!cub3d(texture, data, &game, xpm))
 		esc(&game);
 
     // Cleanup after the game loop ends
-    cleanup(texture, data, xpm);
+    //cleanup(texture, data, xpm);
     return (0);
 }

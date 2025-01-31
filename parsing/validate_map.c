@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:19:36 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/20 17:21:39 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:54:46 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,44 +38,92 @@ bool	check_angles(t_y3d *data)
 {
 	int	i;
 
-	for (i = 0; i < data->row_width[0]; i++)
+	i = -1;
+	while (++i, i < data->row_width[0])
 	{
 		if (data->map[0][i] != ' ' && data->map[0][i] != '1')
 			return (true);
 	}
-	for (i = 0; i < data->row_width[data->height - 1]; i++)
+	i = -1;
+	while (++i, i < data->row_width[data->height - 1])
 	{
-		if (data->map[data->height - 1][i] != ' ' && data->map[data->height - 1][i] != '1')
+		if (data->map[data->height - 1][i] != ' ' && data->map[data->height
+			- 1][i] != '1')
 			return (true);
 	}
-	for (i = 0; i < data->height; i++)
+	i = -1;
+	while (i++, i < data->height)
 	{
-		if (data->row_width[i] > 0 && data->map[i][0] != ' ' && data->map[i][0] != '1')
+		if (data->row_width[i] > 0 && data->map[i][0] != ' '
+			&& data->map[i][0] != '1')
 			return (true);
-		if (data->row_width[i] > 1 && data->map[i][data->row_width[i] - 1] != ' ' && data->map[i][data->row_width[i] - 1] != '1')
+		if (data->row_width[i] > 1 && data->map[i][data->row_width[i]
+			- 1] != ' ' && data->map[i][data->row_width[i] - 1] != '1')
 			return (true);
 	}
-
 	return (false);
 }
-bool	check_map_spaces(t_y3d *data)
-{
-	int	i;
-	int	j;
 
-	if (!data->map || !data->map[0])
-		return (1);
+char	**copy(t_y3d *y3d)
+{
+	int		i;
+	char	**copied;
+
+	copied = malloc(sizeof(char *) * (y3d->height + 1));
+	if (!copied)
+		return (NULL);
 	i = -1;
-	if (check_angles(data))
-		return (error("not the right structure for the map!"), true);
-	while (++i, i < data->height)
+	while (++i < y3d->height)
 	{
-		j = -1;
-		while (++j, j < data->row_width[i])
+		copied[i] = ft_strdup(y3d->map[i]);
+		if (!copied[i])
 		{
-			if (data->map[i][j] == ' ' && !is_valid_space(data, i, j))
-				return (error("not the right structure for the map!"), true);
+			couble_free(copied, i);
+			return (NULL);
 		}
 	}
+	copied[i] = NULL;
+	return (copied);
+}
+
+bool	flood_fill_backtrack(t_y3d *data, int x, int y, char **visited)
+{
+	if (x < 0 || x >= data->height || y < 0 || y >= data->row_width[x])
+		return (true);
+	if (data->map[x][y] == '1' || visited[x][y] == '1')
+		return (false);
+	visited[x][y] = '1';
+	return (flood_fill_backtrack(data, x + 1, y, visited)
+		|| flood_fill_backtrack(data, x - 1, y, visited)
+		|| flood_fill_backtrack(data, x, y + 1, visited)
+		|| flood_fill_backtrack(data, x, y - 1, visited));
+}
+
+bool	check_map_spaces(t_y3d *data)
+{
+	char	**visited;
+
+	int i, j;
+	if (!data->map || !data->map[0])
+		return (true);
+	visited = copy(data);
+	if (!visited)
+		return (true);
+	i = -1;
+	if (check_angles(data))
+		return (error("not the right structure for the map!"),
+			couble_free(visited, data->height), true);
+	while (++i < data->height)
+	{
+		j = -1;
+		while (++j < data->row_width[i])
+		{
+			if ((data->map[i][j] == ' ' && !is_valid_space(data, i, j))
+				|| flood_fill_backtrack(data, i, j, visited))
+				return (error("not the right structure for the map!"),
+					couble_free(visited, data->height), true);
+		}
+	}
+	couble_free(visited, data->height);
 	return (false);
 }

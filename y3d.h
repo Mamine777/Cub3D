@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:37:26 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 19:24:08 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:04:40 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,9 @@ typedef struct s_y3d
 
 // utils
 void				error(const char *str);
-void				couble_free(char **path);
+void				couble_free(char **path, int height);
 void				init_bool(t_textures *texture);
+int					len(char **path);
 bool				validate_input(t_y3d *data);
 void				calculate_texture_position(t_game *game, t_ray *ray, t_draw_info *info);
 int 				get_color(t_game *game, t_ray *ray, t_xpm *wall);
