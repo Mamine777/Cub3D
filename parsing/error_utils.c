@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:26:03 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/27 11:31:01 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:54:05 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	error(const char *str)
 	printf("%s\n", str);
 }
 
-void	couble_free(char **path)
+void	couble_free(char **path, int height)
 {
-	int i;
+	int	i;
 
-	i = 0;
 	if (!path)
 		return ;
-	while (path[i])
+	i = 0;
+	while (i < height && path[i])
 	{
 		free(path[i]);
 		i++;
@@ -34,14 +34,14 @@ void	couble_free(char **path)
 
 bool	validate_input(t_y3d *data)
 {
-	int	i;
-	int	count;
-	int	j;
+	int i;
+	int count;
+	int j;
 	if (!data->map || !data->map[0])
 		return (true);
 	i = -1;
 	count = 0;
-	while (++i, i < data->height )
+	while (++i, i < data->height)
 	{
 		if (!*data->map[i])
 			return (error("Error"), true);
@@ -49,8 +49,9 @@ bool	validate_input(t_y3d *data)
 		while (++j, j < data->row_width[i])
 		{
 			if (!data->map[i][j])
-				return(error("not valid line"), true);
-			if (data->map[i][j] == 'N' || data->map[i][j] == 'W' ||data->map[i][j] == 'S' || data->map[i][j] == 'E')
+				return (error("not valid line"), true);
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'W'
+				|| data->map[i][j] == 'S' || data->map[i][j] == 'E')
 				count++;
 		}
 	}

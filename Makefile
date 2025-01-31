@@ -6,13 +6,13 @@
 #    By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/11 14:14:48 by mokariou          #+#    #+#              #
-#    Updated: 2025/01/30 21:17:51 by mokariou         ###   ########.fr        #
+#    Updated: 2025/01/31 16:06:08 by mokariou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address 
 NORM = norminette
 
 MLX = minilibx-linux/libmlx.a -Iminilibx-linux -lXext -lX11 -lm -lbsd

@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:30:59 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/30 19:03:06 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:54:57 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,11 @@ void	put_pixel(int x, int y, int color, t_game *game)
 	game->data[index + 2] = (color >> 16) & 0xFF;
 }
 
-
 void	init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm)
 {
-	(void) xpm;
+	(void)xpm;
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIDTH,
-			HEIGHT, "cub3D");
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "cub3D");
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->data = mlx_get_data_addr(game->img, &game->bbp, &game->size_line,
 			&game->endian);
@@ -42,11 +40,11 @@ void	init_game(t_game *game, t_y3d *data, t_textures *textrure, t_xpm *xpm)
 
 void	clear_screen(t_game *game)
 {
-	int y;
+	int	y;
 	int	x;
 
 	y = -1;
-	while (++y ,y < HEIGHT)
+	while (++y, y < HEIGHT)
 	{
 		x = -1;
 		while (++x, x < WIDTH)
@@ -55,4 +53,3 @@ void	clear_screen(t_game *game)
 		}
 	}
 }
-

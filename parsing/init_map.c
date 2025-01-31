@@ -6,7 +6,7 @@
 /*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:27:54 by mokariou          #+#    #+#             */
-/*   Updated: 2025/01/27 11:22:05 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:54:10 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	check_map_line(char *line)
 	return (0);
 }
 
-//trim the str
 int	skip_config_lines(int fd, char **line)
 {
 	char	*buffer;
@@ -73,9 +72,9 @@ int	count_map_dimensions(int fd, t_y3d *data, char *first_line)
 	line = get_next_line(fd);
 	i = 1;
 	if (first_line[ft_strlen(first_line) - 1] == '\n')
-			data->biggest_width = ft_strlen(first_line) - 1;
-		else
-			data->row_width[i] = ft_strlen(first_line);
+		data->biggest_width = ft_strlen(first_line) - 1;
+	else
+		data->row_width[i] = ft_strlen(first_line);
 	while (line && line[0] != '\0' && line[0] != '\n')
 	{
 		if (line[ft_strlen(line) - 1] == '\n')
@@ -85,8 +84,7 @@ int	count_map_dimensions(int fd, t_y3d *data, char *first_line)
 		if (data->biggest_width < data->row_width[i])
 			data->biggest_width = data->row_width[i];
 		if (check_map_line(line))
-			return (error("Invalid map content"), free(line),
-				1);
+			return (error("Invalid map content"), free(line), 1);
 		data->height++;
 		i++;
 		free(line);
@@ -105,15 +103,14 @@ int	fill_map_data(int fd, t_y3d *data, char *first_line)
 
 	data->map = (char **)malloc(sizeof(char *) * (data->height + 1));
 	if (!data->map)
-		return (error("Memory allocation failed for map!") ,
-			1);
+		return (error("Memory allocation failed for map!"), 1);
 	len = ft_strlen(first_line);
 	if (first_line[len - 1] == '\n')
 		len--;
 	data->map[0] = (char *)malloc(len + 1);
 	if (!data->map[0])
 		return (error("Memory allocation failed for map row!"),
-			couble_free(data->map), 1);
+			couble_free(data->map, data->height), 1);
 	ft_strlcpy(data->map[0], first_line, len + 1);
 	i = 1;
 	line = get_next_line(fd);
@@ -125,7 +122,7 @@ int	fill_map_data(int fd, t_y3d *data, char *first_line)
 		data->map[i] = (char *)malloc(len + 1);
 		if (!data->map[i])
 			return (error("Memory allocation failed for map row!"),
-				couble_free(data->map), free(line), 1);
+				couble_free(data->map, data->height), free(line), 1);
 		ft_strlcpy(data->map[i], line, len + 1);
 		free(line);
 		line = get_next_line(fd);

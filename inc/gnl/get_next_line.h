@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mokariou <mokariou@student.s19.be>         +#+  +:+       +#+        */
+/*   By: mokariou <mokariou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 22:58:38 by mokariou          #+#    #+#             */
-/*   Updated: 2024/10/18 18:05:58 by mokariou         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:11:40 by mokariou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # ifndef BUFFER_SIZE
 
-#  define BUFFER_SIZE 1000000
+#  define BUFFER_SIZE 64
 # endif
 
 # include <stdlib.h>
